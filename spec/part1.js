@@ -418,7 +418,7 @@
       });
 
       // remove the 'x' to enable test
-      xit('optimize for even numbers', function() {
+      it('optimize for even numbers', function() {
         exponent(3,4);
         expect(exponent.callCount).to.be.at.most(4);
 
@@ -432,11 +432,11 @@
       });
 
       // remove the 'x' to enable test
-      xit('should accept negative integer for base', function() {
-        expect(exponent(-3,4)).to.equal(-81);
+      it('should accept negative integer for base', function() {
+        expect(exponent(-3,3)).to.equal(-27);
         expect(exponent(-12,5)).to.equal(-248832);
-        expect(exponent(-7,2)).to.equal(-49);
-        expect(exponent(-7,4)).to.equal(-2401);
+        expect(exponent(-7,3)).to.equal(-343);
+        expect(exponent(-7,5)).to.equal(-16807);
       });
 
     });
