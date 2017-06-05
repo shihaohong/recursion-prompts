@@ -140,7 +140,6 @@ var reverse = function(string) {
   if (string.length === 0) {
     return '';
   } else {
-    console.log(string[string.length -1 ]);
     result = result.concat(string[string.length - 1]);  
     return result.concat(reverse(string.slice(0, -1)));
   }
@@ -148,6 +147,17 @@ var reverse = function(string) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  // if letter is the same as the last letter in lower case, return true
+  if (string.length > 1) {
+    if (string[0].toLowerCase() === string[string.length - 1].toLowerCase()) {
+      var result = true;
+      return result && palindrome(string.slice(1, -1));
+    } else {
+      return false;
+    }
+  } else {
+    return true;
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
