@@ -109,7 +109,7 @@ var exponent = function(base, exp) {
     return result * exponent(base, exp + 1);
   } else if (exp <= -2 && (exp % 2 === 0)) {
     result = result / base / base;
-    return result * exponont(base, exp + 2);
+    return result * exponent(base, exp + 2);
   } else if (exp >= 2 && (exp % 2 === 0)) {
     result = result * base * base;
     return result * exponent(base, exp - 2);
