@@ -193,11 +193,47 @@ var modulo = function(x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  if (y === 0 || x === 0) {
+    return 0;
+  } else if (y > 0 && x > 0 || y > 0 && x < 0) {
+    return x + multiply(x, y - 1);
+  } else {
+    return -x + multiply(x, y + 1);
+  }
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods.
 var divide = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
+
+  if (x >= 0 && y >= 0) {
+    if (x < y) {
+      return 0;
+    } else {
+      return 1 + divide(x - y, y)
+    }
+  } else if (x <= 0 && y <= 0) {
+    if (x > y) {
+      return 0;
+    } else {
+      return 1 + divide(x + y, y)
+    }
+  } else if (x <= 0 && y >= 0) {
+    if (-x < y) {
+      return 0;
+    } else {
+      return -1 + divide(x + y, y);
+    }
+  } else if (x >= 0 && y <= 0) {
+    if (-y > x) {
+      return 0;
+    } else {
+      return -1 + divide(x - y, y);
+    }
+  }
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
