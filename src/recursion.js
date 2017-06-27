@@ -348,6 +348,11 @@ var countOccurrence = function(array, value) {
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+  if (array.length === 0) {
+    return [];
+  } else {
+    return [callback(array[0])].concat(rMap(array.slice(1), callback));
+  }
 };
 
 // 22. Write a function that counts the number of times a key occurs in an object.
@@ -355,6 +360,20 @@ var rMap = function(array, callback) {
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+  var keys = Object.keys(obj);
+  var count = 0;
+  
+  for (let i = 0; i < keys.length; i++) {
+    if (keys[i] === key) {
+      count++;
+    } 
+
+    if (typeof(obj[keys[i]]) === 'object' && obj[keys[i]] !== null) {
+      count += countKeysInObj(obj[keys[i]], key);
+    }
+  }
+  
+  return count;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
@@ -362,13 +381,39 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+  var keys = Object.keys(obj);
+  var count = 0;
+  
+  for (let i = 0; i < keys.length; i++) {
+    if (obj[keys[i]] === value) {
+      count++;
+    }
+    
+    if (typeof(obj[keys[i]]) === 'object' && obj[keys[i]] !== null) {
+      count += countValuesInObj(obj[keys[i]], value);
+    }
+  }
+  
+  return count;
 };
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
 var replaceKeysInObj = function(obj, oldKey, newKey) {
-};
+  var keys = Object.keys(obj);
+  
+  for (let i = 0; i < keys.length; i++) {
+    if (typeof(obj[keys[i]]) === 'object' && obj[keys[i]] !== null) {
+      replaceKeysInObj(obj[keys[i]], oldKey, newKey);
+    }
 
+    if (keys[i] === oldKey) {
+      obj[newKey] = obj[keys[i]];
+      delete obj[oldKey];
+    }
+  }
+  return obj;
+};
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
 // number is the sum of the previous two.
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
